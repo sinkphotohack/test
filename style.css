@@ -3,10 +3,10 @@
 .tooltip {
     position: absolute;
     padding: 7px;
-    font-size: 12px;
+    font-size: 26px;
     font-family: 'Open Sans' sans-serif;
     pointer-events: none;
-    background: #fff;
+    background: rgb(208, 99, 99);
     border: 1px solid #ccc;
     border-radius: 4px;
     opacity: 0;
@@ -15,6 +15,8 @@
     -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
   }
+
+  
   
   .tooltip p {
     margin: 0;
@@ -22,7 +24,7 @@
   }
   
   .tooltip table {
-    margin: 0;
+    margin: 10;
     padding: 0;
     border-collapse: collapse;
   }
@@ -30,8 +32,13 @@
   
   
   /* For Bar Chart */
-  
+  .tooltip{
+    position: absolute;
+}
+#svg-area{
+    position: relative;
+}
   rect:hover{
-    fill: #FFFF00;
+    fill: #7adb19;
     transition: 0.5s all ease-in;
   }

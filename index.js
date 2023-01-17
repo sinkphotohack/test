@@ -12,7 +12,23 @@ var data = [
   {"year": 2020, "points": 5, "wins": 1, "draws": 2, "losses": 1, "other": {"finished": "N/A", "coach": "Lampard"}}
 
 ];
-
+//mouse event handlers
+function mouseover (d) {
+   
+  tooltip
+      .html("Year: " + d.year + "<br>" + "Points: " + d.points )
+      .style("opacity", 1)
+}
+function mousemove(d, i) {
+  const { clientX, clientY} = d3.event;
+  tooltip
+    .style("left", (clientX) + "px") 
+    .style("top", (clientY) + "px")
+}
+ function mouseleave (d) {
+  tooltip
+    .style("opacity", 0)
+}
 // Set scales
 
 var width = 900;
@@ -30,7 +46,13 @@ var svg = d3.select('#svg-area')
 var tooltip = d3.select('body')
   .append('div')
   .attr('class', 'tooltip')
-  .attr('opacity', '0');
+  .attr('opacity', '1')
+  .style("background-color", "green")
+  .style("border", "solid")
+  .style("border-width", "1px")
+  .style("border-radius", "5px")
+  .style("padding", "7px")
+  .style("max-width", "90px")
 // Create axes
 
 var x = d3.scaleBand()
@@ -45,7 +67,8 @@ var y = d3.scaleLinear()
 svg
   .append("g")
   .attr("fill", 'royalblue')
-  .selectAll("rect")
+
+.selectAll("rect")
   .data(data.sort((a, b) => d3.descending(a.year, b.points)))
   .join("rect")
     .attr("x", (d, i) => x(i))
@@ -53,7 +76,10 @@ svg
     .attr('title', (d) => d.points)
     .attr("class", "rect")
     .attr("height", d => y(0) - y(d.points))
-    .attr("width", x.bandwidth());
+    .attr("width", x.bandwidth())
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave);
 
 // Create Bars or Line function
 
@@ -87,6 +113,6 @@ svg.node();
 
 
 // Mouseover / mouseout
-
+ // Three function that change the tooltip when user hover / move / leave a cell
  
 // Legend function
